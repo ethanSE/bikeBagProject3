@@ -1,0 +1,63 @@
+.scaleInputForm {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.scaleInput input{
+    margin: 5px;
+    flex: 2;
+}
+
+.scaleInput button {
+    margin: 5px;
+    flex: 1;
+}
+
+.scaleInput {
+    padding-top: 15px;
+    background-color: #3c415e;
+    border: 5px solid #1cb3c8;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.scaleInput h3 {
+    text-align: center;
+    color: #dfe2e2;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: #b56618;
+}
+
+.button {
+    text-align: center;
+    background-color: #F58B20;
+    border: none;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: bolder;
+}
+
+.minimized {
+    font-size: larger;
+    color: #dfe2e2;
+    padding-top: 15px;
+    background-color: #3c415e;
+    border: 5px solid #1cb3c8;
+    border-radius: 5px;
+    width: 100%;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.minimized:hover {
+    cursor: pointer;
+}

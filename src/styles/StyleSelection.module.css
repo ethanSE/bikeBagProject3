@@ -1,0 +1,39 @@
+.bagIcon {
+    width: 100%;
+    height: auto;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+.styleContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.styleItem {
+    text-align: center;
+    max-width: 250px;
+    background-color: #3c415e;
+    border: 6px solid #1cb3c8;
+    color: #F58B20;
+    border-radius: 5px;
+    font-family: 'Nanum Gothic Coding', monospace;
+    margin: 15px;
+}
+
+.styleItemActive {
+    box-shadow: 0 0 15px lightgreen;
+    text-align: center;
+    max-width: 250px;
+    background-color: #3c415e;
+    border: 6px solid #1cb3c8;
+    color: #F58B20;
+    border-radius: 5px;
+    font-family: 'Nanum Gothic Coding', monospace;
+    margin: 15px;
+}
+
+.styleItem:hover {
+    box-shadow: 0 0 15px white;
+    cursor: pointer;
+}

@@ -1,0 +1,25 @@
+.customSpecContainer {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+}
+
+.customSpecContents {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    text-align: center;
+    background-color: #F58B20;
+    border: none;
+    min-height: 40px;
+    border-radius: 5px;
+    font-weight: bolder;
+    margin: auto;
+}

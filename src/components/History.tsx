@@ -1,17 +1,17 @@
 import styles from '../styles/History.module.css';
-import frameShape from '../assets/images/frameShape.jpeg'
-import tracedShape from '../assets/images/tracedShape.jpeg'
+import frameShape from '../assets/images/frameShape.jpeg';
+import tracedShape from '../assets/images/tracedShape.jpeg';
 import preppedMaterialsBagOne from '../assets/images/preppedMaterialsBagOne.jpeg';
-import firstAttatchmentMethod from '../assets/images/firstAttatchmentMethod.jpeg'
-import greenZipperSide from '../assets/images/greenZipperSide.jpeg'
-import greenBottleSide from '../assets/images/greenBottleSide.jpeg'
+import firstAttatchmentMethod from '../assets/images/firstAttatchmentMethod.jpeg';
+import greenZipperSide from '../assets/images/greenZipperSide.jpeg';
+import greenBottleSide from '../assets/images/greenBottleSide.jpeg';
 import sandyRiverDelta from '../assets/images/sandyRiverDelta.jpeg';
-import IMG_7651 from '../assets/images/IMG_7651.JPG'
+import IMG_7651 from '../assets/images/IMG_7651.JPG';
 import newZipTop from '../assets/images/newZipTop.jpeg';
 import newZipSide from '../assets/images/newZipSide.jpeg';
 import final from '../assets/images/final.JPEG';
 
-const blogInfo = [
+const blogInfo: BlogPost[] = [
     {
         title: 'First Attempt',
         intro: 'As a regular bike commuter I was looking for a way to get some of the weight off of my back and onto the frame of my bike. I had previously used panniers and found them to be awkward and often overkill for the amount of stuff I needed to carry. There are many custom bag manufacturers online but they tend to be fairly expensive and I figured it would be a fun project to make my own.',
@@ -108,31 +108,44 @@ export default function History() {
     return (
         <div className={styles.history}>
             <h1>History</h1>
-            {blogInfo.map((post) => <Bag post={post} />)}
+            {blogInfo.map((post) => {
+                <Bag
+                    title={post.title}
+                    intro={post.intro}
+                    photos={post.photos}
+                    outro={post.outro}
+                />
+            })}
         </div>
     )
 }
 
-function Bag(props) {
+function Bag(props: BlogPost) {
     return (
         <div className={styles.bagDiv}>
-            <h1>{props.post.title}</h1>
-            <p className={styles.introductionConclusion}>{props.post.intro} </p>
+            <h1>{props.title}</h1>
+            <p className={styles.introductionConclusion}>{props.intro} </p>
 
             <div className={styles.imageGrid}>
-                {props.post.photos.map((photo) => <ImageDiv photo={photo} />)}
+                {props.photos.map((photo: BlogPhoto) => {
+                    <ImageDiv
+                        source={photo.source}
+                        alt={photo.alt}
+                        text={photo.text}
+                    />
+                })}
             </div>
 
-            <p className={styles.introductionConclusion}>{props.post.outro}</p>
+            <p className={styles.introductionConclusion}>{props.outro}</p>
         </div>
     )
 }
 
-function ImageDiv(props) {
+function ImageDiv(props: BlogPhoto) {
     return (
         <div className={styles.photoAndDescription}>
-            <img className={styles.image} src={props.photo.source} alt={props.photo.alt}/>
-            <p>{props.photo.text}</p>
+            <img className={styles.image} src={props.source} alt={props.alt} />
+            <p>{props.text}</p>
         </div>
     )
 }

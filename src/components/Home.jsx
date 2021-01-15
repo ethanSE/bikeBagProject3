@@ -10,9 +10,7 @@ const Home = () => {
     const { setActiveMainComponent } = useContext(ModeContext);
     return (
         <div className={styles.home}>
-            
             <h1>How it works</h1>
-
             <div className={styles.iconDescContainer}>
                 <div className={styles.bigScreenReverseRow}>
                     <div className={styles.icon}>
@@ -55,6 +53,10 @@ const Home = () => {
             <button className='button' onClick={() => setActiveMainComponent('customSpec')}> create custom bag</button>
         </div>
     )
+}
+
+const HowItWorks = () => {
+    
 }
 
 export default Home;

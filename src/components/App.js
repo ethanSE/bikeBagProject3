@@ -9,6 +9,7 @@ import Header from './Header';
 import Home from './Home';
 import CustomSpecification from './CustomSpecification';
 import Account from './Account';
+import History from './History';
 //aws
 import Amplify from 'aws-amplify';
 import config from '../aws-exports';
@@ -67,6 +68,8 @@ const MainComponent = () => {
       return <CustomSpecification />
     case 'account':
       return <Account />
+    case 'history':
+      return < History />
     default:
       console.log('default')
   }

@@ -9,11 +9,12 @@ export default function Header() {
     return (
         <div className={styles.header}>
             <div className={styles.headerContent}>
-                <h1 className={styles.headerTitle}>Bike Frame Bag Designer</h1>
+                <h1 className={styles.headerTitle}>Bike Bag Project</h1>
                 <div className={styles.links}>
                     <SignInOutComponent />
                     <h3 onClick={() => setActiveMainComponent('customSpec')}> Custom </h3>
                     <h3 onClick={() => setActiveMainComponent('home')}> Home </h3>
+                    <h3 onClick={() => setActiveMainComponent('history')}> History</h3>
                 </div>
             </div>
         </div> 

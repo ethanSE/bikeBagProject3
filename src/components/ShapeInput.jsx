@@ -79,7 +79,7 @@ const ShapeInputActive = () => {
         //do some kind of checking(?)
         //is shape closed?
         //number of points(?)
-        await uploadDesign(customSpecState.image, points, customSpecState.scale, user.attributes.sub);
+        await uploadDesign(customSpecState.imageRaw, points, customSpecState.scale, user.attributes.sub);
         setActiveCustomSpecPhase('clear');
         setActiveMainComponent('account')
     }

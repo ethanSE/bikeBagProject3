@@ -108,14 +108,14 @@ export default function History() {
     return (
         <div className={styles.history}>
             <h1>History</h1>
-            {blogInfo.map((post) => {
+            {blogInfo.map((post) =>
                 <Bag
                     title={post.title}
                     intro={post.intro}
                     photos={post.photos}
                     outro={post.outro}
                 />
-            })}
+            )}
         </div>
     )
 }
@@ -127,13 +127,13 @@ function Bag(props: BlogPost) {
             <p className={styles.introductionConclusion}>{props.intro} </p>
 
             <div className={styles.imageGrid}>
-                {props.photos.map((photo: BlogPhoto) => {
+                {props.photos.map((photo: BlogPhoto) =>
                     <ImageDiv
                         source={photo.source}
                         alt={photo.alt}
                         text={photo.text}
                     />
-                })}
+                )}
             </div>
 
             <p className={styles.introductionConclusion}>{props.outro}</p>

@@ -5,7 +5,7 @@
 
 ## Description
 
-As a cycling enthusiast and bike commuter I have been interested in custom bike frame bags for a while and have sewn several of my own design. Bike frame bags are a great technology and increasing accessibility by reducing cost could help to encourage more people to commute by bike and increase quality of life for existing bike commuters.
+As a cycling enthusiast and bike commuter I have been interested in custom bike frame bags for a while and have sewn several of my own design. Bike frame bags are useful not only for bikepacking but also for bike commuting. Increasing accessibility by reducing cost could help to encourage more people to commute by bike and increase quality of life for existing bike commuters.
 
 Custom bike frame bags are currently expensive. A lot of this is labor cost. Materials are only around $50 per bag when using good quality waterproof fabric and zippers and making a full frame bag with two pockets. 
 

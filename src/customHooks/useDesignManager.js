@@ -6,22 +6,35 @@ import { UserContext } from '../context';
 export default function useDesignManager () {
     const { user } = useContext(UserContext)
     const [designs, setDesigns] = useState([])
+    const [status, setStatus] = useState('loading');
 
     useEffect(() => {
         fetchDesigns();
     }, [])
 
     const fetchDesigns = async () => {
-        let result = await API.graphql(graphqlOperation(listCustomDesigns, {
-            filter: {
-                owner: {
-                    eq: user.attributes.sub
+        try {
+            let result = await API.graphql(graphqlOperation(listCustomDesigns, {
+                filter: {
+                    owner: {
+                        eq: user.attributes.sub
+                    }
                 }
-            }
-        }));
-        console.log(result)
-        setDesigns(result.data.listCustomDesigns.items)
+            }));
+            let items = result.data.listCustomDesigns.items;
+            let sortedItems = items.sort((a,b) => Date.parse(a.createdAt) > Date.parse(b.createdAt) ? 1 : -1)
+            setDesigns(sortedItems);
+            setStatus('done');
+        } catch (e) {
+            setStatus('failed')
+            console.log(e);
+        }
     }
 
-    return [designs]
+    const refresh = async () => {
+        setStatus('loading');
+        fetchDesigns();
+    }
+
+    return [designs, status, refresh]
 }

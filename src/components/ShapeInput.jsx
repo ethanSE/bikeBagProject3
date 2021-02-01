@@ -41,6 +41,7 @@ const ShapeInputActive = () => {
     const { user } = useContext(UserContext);
     const [windowWidth] = useWindowWidth(0)
     const [points, setPoints] = useState([]);
+    const [shapeInputSubmitActive, setShapeInputSubmitActive] = useState(true);
     let canvasShapeRef = useRef();
     let shapeInputDivRef = useRef();
     let displayScaleFactor = useRef();
@@ -76,12 +77,15 @@ const ShapeInputActive = () => {
 
     //allows users to submit
     const shapeInputSubmit = async () => {
+        //disable to prevent multiple submits
+        setShapeInputSubmitActive(false)
+
         //do some kind of checking(?)
         //is shape closed?
         //number of points(?)
         await uploadDesign(customSpecState.imageRaw, points, customSpecState.scale, user.attributes.sub);
-        setActiveCustomSpecPhase('clear');
         setActiveMainComponent('account')
+        setActiveCustomSpecPhase('clear');
     }
 
     // allows user to select points
@@ -98,25 +102,25 @@ const ShapeInputActive = () => {
         //it should be the same point
         points.forEach((point) => {
             //get distance froim click to point
-            let xDistance = point[0] * displayScaleFactor.current - xSourceCoord * displayScaleFactor.current;
-            let yDistance = point[1] * displayScaleFactor.current - ySourceCoord * displayScaleFactor.current
-            let distance = Math.hypot(xDistance,yDistance);
+            let xDistance = point.x * displayScaleFactor.current - xSourceCoord * displayScaleFactor.current;
+            let yDistance = point.y * displayScaleFactor.current - ySourceCoord * displayScaleFactor.current
+            let distance = Math.hypot(xDistance, yDistance);
             // if click is within drawn circle
-            if (distance < 10) {        
+            if (distance < 10) {
                 //add that same point to the array
-                setPoints([...points, point]); 
+                setPoints([...points, point]);
                 return;
             };
         });
 
-        setPoints([...points, [xSourceCoord, ySourceCoord]]);
+        setPoints([...points, { x: xSourceCoord, y: ySourceCoord }]);
     }
-    
+
     return (
         <div className={styles.shapeInput} ref={shapeInputDivRef} style={{ minHeight: '50vh' }}>
             <h3>Shape</h3>
             <div className={styles.buttonRow}>
-                <button className={styles.button} onClick={shapeInputSubmit}>Submit Design</button>
+                <button className={styles.button} onClick={shapeInputSubmitActive && shapeInputSubmit}>Submit Design</button>
                 <button className={styles.button} onClick={() => setPoints([])}>Reset Shape</button>
             </div>
             <canvas ref={canvasShapeRef} width='0' height='0' onClick={canvasShapeClick} />
@@ -127,7 +131,7 @@ const ShapeInputActive = () => {
 const uploadDesign = async (image, shape, scale, userId) => {
     try {
         //upload image
-        let {key} = await Storage.put(`${uuid()}`, image, { contentType: 'image/png' })
+        let { key } = await Storage.put(`${uuid()}`, image, { contentType: 'image/png' })
         //create new bag object
         const newBag = {
             id: `${uuid()}`,
@@ -138,7 +142,7 @@ const uploadDesign = async (image, shape, scale, userId) => {
                 key: key,
             },
             scale: scale,
-            points: shape.toString(),
+            points: shape,
             isOrdered: false
         }
         //store in dynamoDB

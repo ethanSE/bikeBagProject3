@@ -15,9 +15,15 @@ export const createCustomDesign = /* GraphQL */ `
         key
       }
       scale
-      points
+      points {
+        x
+        y
+      }
       createdAt
       isOrdered
+      _version
+      _deleted
+      _lastChangedAt
       updatedAt
     }
   }
@@ -36,9 +42,15 @@ export const updateCustomDesign = /* GraphQL */ `
         key
       }
       scale
-      points
+      points {
+        x
+        y
+      }
       createdAt
       isOrdered
+      _version
+      _deleted
+      _lastChangedAt
       updatedAt
     }
   }
@@ -57,9 +69,15 @@ export const deleteCustomDesign = /* GraphQL */ `
         key
       }
       scale
-      points
+      points {
+        x
+        y
+      }
       createdAt
       isOrdered
+      _version
+      _deleted
+      _lastChangedAt
       updatedAt
     }
   }

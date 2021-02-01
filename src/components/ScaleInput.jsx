@@ -72,11 +72,7 @@ const ScaleInputActive = () => {
             let y = (evt.clientY - rect.top);
             let xSourceCoord = x / displayScaleFactor;
             let ySourceCoord = y / displayScaleFactor;
-            if (topTubePoints.length === 1) {
-                setTopTubePoints([topTubePoints[0], [xSourceCoord, ySourceCoord]]);
-            } else {
-                setTopTubePoints([[xSourceCoord, ySourceCoord]]);
-            }
+            setTopTubePoints([...topTubePoints, {x: xSourceCoord, y: ySourceCoord}]);
         }
     }
 
@@ -84,7 +80,7 @@ const ScaleInputActive = () => {
     const setPixelToInchScale = (event) => {
         event.preventDefault();
         if (topTubePoints.length === 2) {
-            let distance = Math.hypot(topTubePoints[0][0] - topTubePoints[1][0], topTubePoints[0][1] - topTubePoints[1][1])
+            let distance = Math.hypot(topTubePoints[0].x - topTubePoints[1].x, topTubePoints[0].y - topTubePoints[1].y)
             let scale = (distance / scaleInputRef.value);
             setCustomSpecState({ ...customSpecState, scale: scale })
             setActiveCustomSpecPhase('shape');

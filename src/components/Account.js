@@ -30,7 +30,6 @@ const DesignList = () => {
 }
 
 const DesignItem = (props) => {
-    const points = stringToPointsParser(props.design.points)
     const canvasRef = useRef();
 
     useEffect(() => {
@@ -49,8 +48,8 @@ const DesignItem = (props) => {
             ctx.drawImage(img, 0, 0, canvasRef.current.width, canvasRef.current.height);
             let displayScaleFactor = canvasRef.current.width / img.width;
             //draw points and lines
-            drawPoints(canvasRef, points, displayScaleFactor);
-            drawLines(canvasRef, points, displayScaleFactor);
+            drawPoints(canvasRef, props.design.points, displayScaleFactor);
+            drawLines(canvasRef, props.design.points, displayScaleFactor);
         }
     }
 

@@ -1,16 +1,16 @@
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { API, graphqlOperation } from "aws-amplify";
 import { listCustomDesigns } from '../graphql/queries'
-import { UserContext } from '../context';
 
-export default function useDesignManager () {
-    const { user } = useContext(UserContext)
+export default function useDesignManager (user) {
     const [designs, setDesigns] = useState([])
     const [status, setStatus] = useState('loading');
 
     useEffect(() => {
-        fetchDesigns();
-    }, [])
+        if (user) {
+            fetchDesigns();
+        }
+    }, [user])
 
     const fetchDesigns = async () => {
         try {

@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-//hooks
+
+//custom hooks
 import { useUIStateManager } from '../customHooks/useUIStateManager'
+import useDesignManager from '../customHooks/useDesignManager';
 //context
-import { ModeContext, CustomSpecContext, UserContext } from '../context';
+import { ModeContext, CustomSpecContext, UserContext, SavedDesignsContext } from '../context';
 
 //components
 import Header from './Header';
@@ -45,13 +47,17 @@ export default function App() {
 
   const [customSpecUIState, setActiveCustomSpecPhase] = useUIStateManager();
   const custom = { customSpecState, setCustomSpecState, customSpecUIState, setActiveCustomSpecPhase };
+  //saved designs
+  const [designs, status, refresh] = useDesignManager(user);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <ModeContext.Provider value={{ activeMainComponent, setActiveMainComponent }}>
         <CustomSpecContext.Provider value={custom}>
-          <Header />
-          <MainComponent />
+          <SavedDesignsContext.Provider value={{designs, status, refresh}}>
+            <Header />
+            <MainComponent />
+          </SavedDesignsContext.Provider>
         </CustomSpecContext.Provider>
       </ModeContext.Provider>
     </UserContext.Provider>

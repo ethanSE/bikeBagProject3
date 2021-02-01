@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Storage } from "aws-amplify";
 import * as styles from '../styles/Account.module.css'
-//custom hooks
-import useDesignManager from '../customHooks/useDesignManager';
 //actions
 import { drawPoints, drawLines } from '../actions'
+import { SavedDesignsContext } from '../context';
 
 export default function Account() {
     return (
@@ -15,7 +14,7 @@ export default function Account() {
 }
 
 const DesignList = () => {
-    const [designs, status, refresh] = useDesignManager();
+    const { designs, status, refresh } = useContext(SavedDesignsContext);
 
     switch (status) {
         case 'done':
@@ -30,7 +29,7 @@ const DesignList = () => {
                 <p>loading</p>
             );
         default:
-            return(
+            return (
                 <div>
                     <button onClick={refresh}>RELOAD</button>
                 </div>

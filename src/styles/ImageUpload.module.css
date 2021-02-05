@@ -1,16 +1,11 @@
 .imageUpload {
+    composes: customInputDiv from 'util.css';
     align-self: center;
     font-size: larger;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #3c415e;
-    border: 5px solid #1cb3c8;
-    border-radius: 5px;
-    width: 100%;
     margin-top: 20px;
-    margin-bottom: 20px;
-    padding-top: 15px;
     padding-bottom: 15px;
 }
 
@@ -19,11 +14,8 @@
 }
 
 .button {
+    composes: button from './util.css';
     margin-top: 15px;
-    background-color: #F58B20;
-    border: none;
-    border-radius: 5px;
-    font-weight: bolder;
 }
 
 .button p {
@@ -51,17 +43,7 @@
 }
 
 .minimized {
-    font-size: larger;
-    width: 100%;
-    background-color: #3c415e;
-    border: 5px solid #1cb3c8;
-    border-radius: 5px;
-    text-align: center;
-    color: #dfe2e2;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    composes: minimized from './util.css';
 }
 
 .minimized:hover {

@@ -33,7 +33,7 @@ const DesignList = () => {
         default:
             return (
                 <div>
-                    <button onClick={refresh}>RELOAD</button>
+                    <button className={styles.button} onClick={refresh}>RELOAD</button>
                 </div>
             )
     }
@@ -76,10 +76,10 @@ const DesignItem = (props) => {
     }
 
     return (
-        <div>
+        <div className={styles.design}>
             <p>id = {props.design.id}</p>
             <canvas ref={canvasRef} className={styles.canvas} />
-            <button onClick={deleteDesign}>DELETE</button>
+            <button className={styles.button} onClick={deleteDesign}>DELETE</button>
         </div>
     )
 }

@@ -1,9 +1,6 @@
 .shapeInput {
+    composes: customInputDiv from 'util.css';
     padding-top: 15px;
-    background-color: #3c415e;
-    border: 5px solid #1cb3c8;
-    border-radius: 5px;
-    width: 100%;
 }
 
 .shapeInput h3 {
@@ -27,26 +24,12 @@
 }
 
 .button {
-    text-align: center;
-    background-color: #F58B20;
-    border: none;
-    height: 40px;
-    border-radius: 5px;
-    font-weight: bolder;
+    composes: button from 'util.css';
     width: 120px;
 }
 
 .minimized {
-    font-size: larger;
-    color: #dfe2e2;
-    padding-top: 15px;
-    background-color: #3c415e;
-    border: 5px solid #1cb3c8;
-    border-radius: 5px;
-    width: 100%;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-    text-align: center;
+    composes: minimized from './util.css'
 }
 
 .minimized:hover {

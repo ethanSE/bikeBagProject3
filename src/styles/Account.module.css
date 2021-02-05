@@ -14,3 +14,16 @@
     width: 90%;
     max-width: 700px;
 }
+
+.button { 
+    composes: button from './util.css';
+}
+
+.design {
+    background-color: #3c415e;
+    border: 5px solid #1cb3c8;
+    border-radius: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}

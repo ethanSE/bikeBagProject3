@@ -43,9 +43,8 @@
     flex: 1;
 }
 
-button {
-    margin-top: 20px;
-    margin-bottom: 20px;
+.button {
+    composes: button from './util.css';
 }
 
 @media screen and (min-width: 718px) {
@@ -60,5 +59,4 @@ button {
         display: flex;
         flex-direction: row-reverse;
     }
-
 }

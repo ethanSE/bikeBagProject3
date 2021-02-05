@@ -25,7 +25,7 @@ export default function ScaleInput() {
 }
 
 const ScaleInputActive = () => {
-    const [windowWidth] = useWindowWidth(50)
+    const [windowWidth] = useWindowWidth(0)
     const [topTubePoints, setTopTubePoints] = useState([]);
     const [sourceDimensions, setSourceDimensions] = useState(null);
     const { setCustomSpecState, customSpecState, setActiveCustomSpecPhase } = useContext(CustomSpecContext)
@@ -90,7 +90,7 @@ const ScaleInputActive = () => {
     return (
         <div className={styles.scaleInput} ref={scaleInputDivRef} style={{ minHeight: '50vh' }}>
             <h3>Scale</h3>
-            <form onSubmit={(event) => setPixelToInchScale(event)} className={styles.scaleInputForm}>
+            <form onSubmit={setPixelToInchScale} className={styles.scaleInputForm}>
                 <input ref={(input) => { scaleInputRef = input }} placeholder='Top Tube Length in inches' type='number' />
                 <button className={styles.button} type='submit'>Submit</button>
                 <button className={styles.button} onClick={() => setTopTubePoints([])}>Reset</button>

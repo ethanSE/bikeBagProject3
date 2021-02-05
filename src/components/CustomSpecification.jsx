@@ -33,7 +33,7 @@ const SignInPrompt = () => {
         <div className={styles.customSpecContainer}>
             <div className={styles.customSpecContents} >
                 <h1>Sign in to create a custom bag</h1>
-                <button className={styles.signInButton} onClick={() => Auth.federatedSignIn()}> Sign In </button>
+                <button className={styles.button} onClick={() => Auth.federatedSignIn()}> Sign In </button>
             </div>
         </div>
     )

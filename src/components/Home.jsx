@@ -50,7 +50,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <button className='button' onClick={() => setActiveMainComponent('customSpec')}> create custom bag</button>
+            <button className={styles.button} onClick={() => setActiveMainComponent('customSpec')}> create custom bag</button>
         </div>
     )
 }

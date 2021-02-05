@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-
 //custom hooks
 import { useUIStateManager } from '../customHooks/useUIStateManager'
 import useDesignManager from '../customHooks/useDesignManager';
 //context
 import { ModeContext, CustomSpecContext, UserContext, SavedDesignsContext } from '../context';
-
 //components
 import Header from './Header';
 import Home from './Home';
@@ -16,7 +14,6 @@ import History from './History';
 import Amplify from 'aws-amplify';
 import config from '../aws-exports';
 import { Auth, Hub } from 'aws-amplify';
-
 
 Amplify.configure(config)
 

@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { Storage } from "aws-amplify";
+import { API, graphqlOperation, Storage } from "aws-amplify";
 import * as styles from '../styles/Account.module.css'
 //actions
 import { drawPoints, drawLines } from '../actions'
 import { SavedDesignsContext } from '../context';
+//graphql
+import { deleteCustomDesign } from '../graphql/mutations';
 
 export default function Account() {
     return (
@@ -64,10 +66,20 @@ const DesignItem = (props) => {
         }
     }
 
+    async function deleteDesign() {
+        console.log(props.design)
+        try {
+            await API.graphql(graphqlOperation(deleteCustomDesign, { input: { id: props.design.id, _version: props.design.version} }))
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return (
         <div>
             <p>id = {props.design.id}</p>
             <canvas ref={canvasRef} className={styles.canvas} />
+            <button onClick={deleteDesign}>DELETE</button>
         </div>
     )
 }

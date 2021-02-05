@@ -6,6 +6,7 @@
 }
 
 .designListContainer {
+    display: flex;
     align-items: center;
     flex-direction: column;
 }
@@ -17,6 +18,9 @@
 
 .button { 
     composes: button from './util.css';
+    width: 100px;
+    display: flex;
+    justify-content: center;
 }
 
 .design {
@@ -26,4 +30,13 @@
     padding-top: 15px;
     padding-bottom: 15px;
     margin-bottom: 20px;
+}
+
+.createDesignContainer {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }

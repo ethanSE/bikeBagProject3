@@ -3,7 +3,7 @@ import { API, graphqlOperation, Storage } from "aws-amplify";
 import * as styles from '../styles/Account.module.css'
 //actions
 import { drawPoints, drawLines } from '../actions'
-import { SavedDesignsContext } from '../context';
+import { SavedDesignsContext, ModeContext } from '../context';
 //graphql
 import { deleteCustomDesign } from '../graphql/mutations';
 
@@ -23,8 +23,11 @@ const DesignList = () => {
             return (
                 <div className={styles.designListContainer}>
                     <h1>Your saved designs</h1>
-                    {designs.map((design) => <DesignItem design={design} key={design.id} />)}
-                </div>
+
+                    <CreateDesignButton status={status} designCount={designs.length} />
+
+                    { designs.map((design) => <DesignItem design={design} key={design.id} />)}
+                </div >
             )
         case 'loading':
             return (
@@ -69,7 +72,7 @@ const DesignItem = (props) => {
     async function deleteDesign() {
         console.log(props.design)
         try {
-            await API.graphql(graphqlOperation(deleteCustomDesign, { input: { id: props.design.id, _version: props.design.version} }))
+            await API.graphql(graphqlOperation(deleteCustomDesign, { input: { id: props.design.id, _version: props.design._version } }))
         } catch (e) {
             console.log(e)
         }
@@ -80,6 +83,23 @@ const DesignItem = (props) => {
             <p>id = {props.design.id}</p>
             <canvas ref={canvasRef} className={styles.canvas} />
             <button className={styles.button} onClick={deleteDesign}>DELETE</button>
+        </div>
+    )
+}
+
+const CreateDesignButton = (props) => {
+    const { setActiveMainComponent } = useContext(ModeContext)
+
+    if (props.status !== 'done' || props.designCount > 0) {
+        return null
+    }
+
+    return (
+        <div className={styles.createDesignContainer}>
+            <p>You have no saved designs</p>
+            <div className={styles.button} onClick={() => setActiveMainComponent('customSpec')}>
+                <p>create</p>
+            </div>
         </div>
     )
 }

@@ -5,7 +5,7 @@ import * as styles from '../styles/Account.module.css'
 import { drawPoints, drawLines } from '../actions'
 import { SavedDesignsContext, ModeContext } from '../context';
 //graphql
-import { deleteCustomDesign } from '../graphql/mutations';
+import { deleteDesign } from '../graphql/mutations';
 
 export default function Account() {
     return (
@@ -69,10 +69,10 @@ const DesignItem = (props) => {
         }
     }
 
-    async function deleteDesign() {
+    async function deleteDesignMut() {
         console.log(props.design)
         try {
-            await API.graphql(graphqlOperation(deleteCustomDesign, { input: { id: props.design.id, _version: props.design._version } }))
+            await API.graphql(graphqlOperation(deleteDesign, { input: { id: props.design.id, _version: props.design._version } }))
         } catch (e) {
             console.log(e)
         }
@@ -82,7 +82,7 @@ const DesignItem = (props) => {
         <div className={styles.design}>
             <p>id = {props.design.id}</p>
             <canvas ref={canvasRef} className={styles.canvas} />
-            <button className={styles.button} onClick={deleteDesign}>DELETE</button>
+            <button className={styles.button} onClick={deleteDesignMut}>DELETE</button>
         </div>
     )
 }

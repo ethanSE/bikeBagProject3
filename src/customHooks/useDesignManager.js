@@ -1,7 +1,7 @@
 import { useState, useEffect, useReducer } from 'react';
 import { API, graphqlOperation } from "aws-amplify";
-import { listCustomDesigns } from '../graphql/queries';
-import { onCreateCustomDesign, onUpdateCustomDesign, onDeleteCustomDesign } from '../graphql/subscriptions';
+import { listDesigns } from '../graphql/queries';
+import { onCreateDesign, onUpdateDesign, onDeleteDesign } from '../graphql/subscriptions';
 
 export default function useDesignManager(user) {
     const [designs, dispatch] = useReducer(reducer, [])
@@ -20,14 +20,14 @@ export default function useDesignManager(user) {
 
     const fetchDesigns = async () => {
         try {
-            let result = await API.graphql(graphqlOperation(listCustomDesigns, {
+            let result = await API.graphql(graphqlOperation(listDesigns, {
                 filter: {
                     owner: {
                         eq: user.attributes.sub
                     }
                 }
             }));
-            dispatch({ type: 'addDesigns', value: result.data.listCustomDesigns.items });
+            dispatch({ type: 'addDesigns', value: result.data.listDesigns.items });
             setStatus('done');
         } catch (e) {
             setStatus('failed');
@@ -37,29 +37,29 @@ export default function useDesignManager(user) {
 
     const setUpSubscriptions = () => {
         //subscribe to new design event
-        let newDesignSub = API.graphql(graphqlOperation(onCreateCustomDesign))
+        let newDesignSub = API.graphql(graphqlOperation(onCreateDesign))
             .subscribe({
                 next: (newDesignResult) => {
-                    const newDesign = newDesignResult.value.data.onCreateCustomDesign;
+                    const newDesign = newDesignResult.value.data.onCreateDesign;
                     dispatch({ type: 'addDesigns', value: [newDesign] });
                 },
                 error: (error) => console.log(error)
             })
         //subscribe to design update event
-        let updateDesignSub = API.graphql(graphqlOperation(onUpdateCustomDesign))
+        let updateDesignSub = API.graphql(graphqlOperation(onUpdateDesign))
             .subscribe({
                 next: (updatedDesignResult) => {
-                    const updatedDesign = updatedDesignResult.value.data.onUpdateCustomDesign;
+                    const updatedDesign = updatedDesignResult.value.data.onUpdateDesign;
                     //dispatch update action
                     dispatch({ type: 'updateDesign', value: updatedDesign });
                 },
                 error: (error) => console.log(error)
             })
 
-        let deleteDesignSub = API.graphql(graphqlOperation(onDeleteCustomDesign))
+        let deleteDesignSub = API.graphql(graphqlOperation(onDeleteDesign))
             .subscribe({
                 next: (deletedDesignResult) => {
-                    const deletedDesign = deletedDesignResult.value.data.onDeleteCustomDesign;
+                    const deletedDesign = deletedDesignResult.value.data.onDeleteDesign;
                     dispatch({ type: 'deleteDesign', value: deletedDesign});
                 }
             })

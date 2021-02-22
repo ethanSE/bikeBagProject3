@@ -1,9 +1,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateCustomDesign = /* GraphQL */ `
-  subscription OnCreateCustomDesign {
-    onCreateCustomDesign {
+export const onCreateDesign = /* GraphQL */ `
+  subscription OnCreateDesign {
+    onCreateDesign {
       id
       owner
       image {
@@ -17,17 +17,13 @@ export const onCreateCustomDesign = /* GraphQL */ `
         y
       }
       createdAt
-      isOrdered
-      _version
-      _deleted
-      _lastChangedAt
       updatedAt
     }
   }
 `;
-export const onUpdateCustomDesign = /* GraphQL */ `
-  subscription OnUpdateCustomDesign {
-    onUpdateCustomDesign {
+export const onUpdateDesign = /* GraphQL */ `
+  subscription OnUpdateDesign {
+    onUpdateDesign {
       id
       owner
       image {
@@ -41,17 +37,13 @@ export const onUpdateCustomDesign = /* GraphQL */ `
         y
       }
       createdAt
-      isOrdered
-      _version
-      _deleted
-      _lastChangedAt
       updatedAt
     }
   }
 `;
-export const onDeleteCustomDesign = /* GraphQL */ `
-  subscription OnDeleteCustomDesign {
-    onDeleteCustomDesign {
+export const onDeleteDesign = /* GraphQL */ `
+  subscription OnDeleteDesign {
+    onDeleteDesign {
       id
       owner
       image {
@@ -65,10 +57,6 @@ export const onDeleteCustomDesign = /* GraphQL */ `
         y
       }
       createdAt
-      isOrdered
-      _version
-      _deleted
-      _lastChangedAt
       updatedAt
     }
   }

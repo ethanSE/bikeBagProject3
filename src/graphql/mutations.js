@@ -1,12 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createCustomDesign = /* GraphQL */ `
-  mutation CreateCustomDesign(
-    $input: CreateCustomDesignInput!
-    $condition: ModelCustomDesignConditionInput
+export const createDesign = /* GraphQL */ `
+  mutation CreateDesign(
+    $input: CreateDesignInput!
+    $condition: ModelDesignConditionInput
   ) {
-    createCustomDesign(input: $input, condition: $condition) {
+    createDesign(input: $input, condition: $condition) {
       id
       owner
       image {
@@ -20,20 +20,16 @@ export const createCustomDesign = /* GraphQL */ `
         y
       }
       createdAt
-      isOrdered
-      _version
-      _deleted
-      _lastChangedAt
       updatedAt
     }
   }
 `;
-export const updateCustomDesign = /* GraphQL */ `
-  mutation UpdateCustomDesign(
-    $input: UpdateCustomDesignInput!
-    $condition: ModelCustomDesignConditionInput
+export const updateDesign = /* GraphQL */ `
+  mutation UpdateDesign(
+    $input: UpdateDesignInput!
+    $condition: ModelDesignConditionInput
   ) {
-    updateCustomDesign(input: $input, condition: $condition) {
+    updateDesign(input: $input, condition: $condition) {
       id
       owner
       image {
@@ -47,20 +43,16 @@ export const updateCustomDesign = /* GraphQL */ `
         y
       }
       createdAt
-      isOrdered
-      _version
-      _deleted
-      _lastChangedAt
       updatedAt
     }
   }
 `;
-export const deleteCustomDesign = /* GraphQL */ `
-  mutation DeleteCustomDesign(
-    $input: DeleteCustomDesignInput!
-    $condition: ModelCustomDesignConditionInput
+export const deleteDesign = /* GraphQL */ `
+  mutation DeleteDesign(
+    $input: DeleteDesignInput!
+    $condition: ModelDesignConditionInput
   ) {
-    deleteCustomDesign(input: $input, condition: $condition) {
+    deleteDesign(input: $input, condition: $condition) {
       id
       owner
       image {
@@ -74,10 +66,6 @@ export const deleteCustomDesign = /* GraphQL */ `
         y
       }
       createdAt
-      isOrdered
-      _version
-      _deleted
-      _lastChangedAt
       updatedAt
     }
   }

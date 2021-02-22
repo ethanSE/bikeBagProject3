@@ -8,7 +8,7 @@ import { CustomSpecContext, ModeContext, UserContext } from '../context';
 import { drawPoints, drawLines } from '../actions'
 //graphql
 import { API, graphqlOperation, Storage } from "aws-amplify";
-import { createCustomDesign } from '../graphql/mutations'
+import { createDesign } from '../graphql/mutations'
 //uuid
 import { v4 as uuid } from 'uuid';
 import config from '../aws-exports'
@@ -142,11 +142,10 @@ const uploadDesign = async (image, shape, scale, userId) => {
                 key: key,
             },
             scale: scale,
-            points: shape,
-            isOrdered: false
+            points: shape
         }
         //store in dynamoDB
-        await API.graphql(graphqlOperation(createCustomDesign, { input: newBag }));
+        await API.graphql(graphqlOperation(createDesign, { input: newBag }));
     } catch (e) {
         console.log(e)
     }

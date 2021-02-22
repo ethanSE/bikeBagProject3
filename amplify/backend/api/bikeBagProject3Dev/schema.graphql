@@ -1,0 +1,18 @@
+type Design @model {
+  id: ID!
+  owner: String!
+  image: S3Object
+  scale: Float!
+  points: [Vertex]
+}
+
+type Vertex {
+  x: Float!
+  y: Float!
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}

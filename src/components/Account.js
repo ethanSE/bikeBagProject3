@@ -70,7 +70,6 @@ const DesignItem = (props) => {
     }
 
     async function deleteDesignMut() {
-        console.log(props.design)
         try {
             await API.graphql(graphqlOperation(deleteDesign, { input: { id: props.design.id, _version: props.design._version } }))
         } catch (e) {
@@ -82,7 +81,10 @@ const DesignItem = (props) => {
         <div className={styles.design}>
             <p>id = {props.design.id}</p>
             <canvas ref={canvasRef} className={styles.canvas} />
-            <button className={styles.button} onClick={deleteDesignMut}>DELETE</button>
+
+            <div className={styles.buttonContainer}>
+                <button className={styles.button} onClick={deleteDesignMut}>DELETE</button>
+            </div>
         </div>
     )
 }

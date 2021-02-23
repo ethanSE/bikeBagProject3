@@ -7,6 +7,8 @@ import { CustomSpecContext } from '../context';
 import { drawPoints, drawLines } from '../actions'
 //styles
 import styles from '../styles/ScaleInput.module.css'
+//components
+import ErrorMessage from './ErrorMessage'
 
 export default function ScaleInput() {
     const { customSpecUIState, setActiveCustomSpecPhase } = useContext(CustomSpecContext)
@@ -25,15 +27,17 @@ export default function ScaleInput() {
 }
 
 const ScaleInputActive = () => {
-    const [windowWidth] = useWindowWidth(0)
-    const [topTubePoints, setTopTubePoints] = useState([]);
-    const [sourceDimensions, setSourceDimensions] = useState(null);
-    const { setCustomSpecState, customSpecState, setActiveCustomSpecPhase } = useContext(CustomSpecContext)
-    let canvasScaleRef = useRef();
-    let scaleInputRef = useRef();
+    const { setCustomSpecState, customSpecState, setActiveCustomSpecPhase } = useContext(CustomSpecContext);
+    const [windowWidth] = useWindowWidth(0);
+    const [displayScaleFactor, setDisplayScaleFactor] = useState();
+    const [length, setLength] = useState();
+    const [message, setMessage] = useState(null);
+    let canvasRef = useRef();
     let scaleInputDivRef = useRef();
-    let ctx;
+    let topTubePoints = useRef([]);
+    let selectedPoint = useRef({ selected: false }).current;
 
+    //scroll window to focus on this component when it is first rendered
     useEffect(() => {
         setTimeout(() => {
             window.scroll({
@@ -43,59 +47,113 @@ const ScaleInputActive = () => {
         }, 0);
     }, [])
 
+    //draws the image and points on the canvas when window width changes
+    useEffect(() => {
+        setDisplayScaleFactor(scaleInputDivRef.current.clientWidth / customSpecState.image.width);
+        drawCanvas();
+    }, [windowWidth, displayScaleFactor])
+
     //loads image onto canvas and calls drawTopTubePoints
     const drawCanvas = () => {
-        if (!sourceDimensions) {
-            setSourceDimensions({ imageHeight: customSpecState.image.height, imageWidth: customSpecState.image.width });
-        }
         //recalculates in case windown size changed
-        let displayScaleFactor = scaleInputDivRef.current.clientWidth / customSpecState.image.width;
-        canvasScaleRef.current.width = customSpecState.image.width * displayScaleFactor;
-        canvasScaleRef.current.height = customSpecState.image.height * displayScaleFactor;
-        ctx = canvasScaleRef.current.getContext('2d');
-        ctx.drawImage(customSpecState.image, 0, 0, canvasScaleRef.current.width, canvasScaleRef.current.height); //draws image on canvas
-        drawPoints(canvasScaleRef, topTubePoints, displayScaleFactor)
-        drawLines(canvasScaleRef, topTubePoints, displayScaleFactor)
-    }
-
-    //draws the image and points on the canvas when window width or points changes
-    useEffect(() => {
-        drawCanvas();
-    }, [windowWidth, topTubePoints])
-
-    //captures user click on the canvas and converts to pixel coordinates of original image
-    const canvasScaleClick = (evt) => {
-        let displayScaleFactor = scaleInputDivRef.current.clientWidth / sourceDimensions.imageWidth;
-        if (topTubePoints.length < 2) {
-            let rect = canvasScaleRef.current.getBoundingClientRect();
-            let x = (evt.clientX - rect.left);
-            let y = (evt.clientY - rect.top);
-            let xSourceCoord = x / displayScaleFactor;
-            let ySourceCoord = y / displayScaleFactor;
-            setTopTubePoints([...topTubePoints, {x: xSourceCoord, y: ySourceCoord}]);
-        }
+        canvasRef.current.width = customSpecState.image.width * displayScaleFactor;
+        canvasRef.current.height = customSpecState.image.height * displayScaleFactor;
+        let ctx = canvasRef.current.getContext('2d');
+        ctx.drawImage(customSpecState.image, 0, 0, canvasRef.current.width, canvasRef.current.height); //draws image on canvas
+        drawPoints(canvasRef, topTubePoints.current, displayScaleFactor);
+        drawLines(canvasRef, topTubePoints.current, displayScaleFactor);
     }
 
     //establishes a ratio of source image pixels to inches
-    const setPixelToInchScale = (event) => {
+    function setSourcePixelToInchScale(event) {
         event.preventDefault();
-        if (topTubePoints.length === 2) {
-            let distance = Math.hypot(topTubePoints[0].x - topTubePoints[1].x, topTubePoints[0].y - topTubePoints[1].y)
-            let scale = (distance / scaleInputRef.value);
+
+        if (topTubePoints.current.length < 2) {
+            setMessage('select two points');
+        } else if (!length) {
+            setMessage('enter a measurement');
+            drawCanvas();
+        } else {
+            let distance = Math.hypot(topTubePoints.current[0].x - topTubePoints.current[1].x, topTubePoints.current[0].y - topTubePoints.current[1].y)
+            let scale = (distance / length);
             setCustomSpecState({ ...customSpecState, scale: scale })
             setActiveCustomSpecPhase('shape');
         }
     }
 
+    const mouseDownFunction = (evt) => {
+        //express press location in source image pixels
+        let click = getSourceCoords(evt, canvasRef, displayScaleFactor);
+
+        //get index of point that the click is within
+        let selectedIndex = topTubePoints.current.findIndex((point) => {
+            return Math.hypot(click.x - point.x, click.y - point.y) * displayScaleFactor < 10;
+        });
+
+        //if click is in an existing point 
+        if (selectedIndex >= 0) {
+            //track point as selected for dragging using selectedPoint ref
+            selectedPoint = { selected: true, index: selectedIndex }
+        } else if (topTubePoints.current.length < 2) {
+            //add a new point
+            topTubePoints.current = [...topTubePoints.current, { x: click.x, y: click.y }];
+            //track as selected for dragging
+            selectedPoint = { selected: true, index: topTubePoints.current.length - 1 }
+            drawCanvas();
+        }
+    }
+
+    const dragPoint = (evt) => {
+        //if a point is selected
+        if (selectedPoint.selected) {
+            let newPos = getSourceCoords(evt, canvasRef,displayScaleFactor);
+
+            //move that point to the current cursor location and redraw
+            topTubePoints.current[selectedPoint.index] = newPos;
+            drawCanvas();
+        }
+    }
+
+    const deselect = () => {
+        selectedPoint.selected = false;
+    }
+    
+    const reset = (e) => {
+        e.preventDefault();
+        topTubePoints.current = [];
+        drawCanvas();
+        setMessage(null);
+    }
+
     return (
-        <div className={styles.scaleInput} ref={scaleInputDivRef} style={{ minHeight: '50vh' }}>
+        <div className={styles.scaleInput} ref={scaleInputDivRef} style={{ minHeight: '50vh', justifyContent: 'center' }}>
             <h3>Scale</h3>
-            <form onSubmit={setPixelToInchScale} className={styles.scaleInputForm}>
-                <input ref={(input) => { scaleInputRef = input }} placeholder='Top Tube Length in inches' type='number' />
+            <p>This step establishes a scale from image units to real world units. Upload a photo of your bike from the side. Select two points in the image and enter the real world distance. Points can be dragged for fine-tuning </p>
+            <ErrorMessage message={message} />
+            <form onSubmit={setSourcePixelToInchScale} className={styles.scaleInputForm}>
+                <input onChange={(e) => setLength(e.target.value)} placeholder='Top Tube Length in inches' type='number' step="0.1" value={length} />
                 <button className={styles.button} type='submit'>Submit</button>
-                <button className={styles.button} onClick={() => setTopTubePoints([])}>Reset</button>
+                <button className={styles.button} onClick={reset}>Reset</button>
             </form>
-            <canvas ref={canvasScaleRef} width='0' height='0' onClick={canvasScaleClick} />
+            <canvas
+                ref={canvasRef}
+                width='0'
+                height='0'
+                onMouseDown={mouseDownFunction}
+                onMouseUp={deselect}
+                onMouseOut={deselect}
+                onMouseMove={dragPoint}
+            />
         </div>
+    )
+}
+
+const getSourceCoords = (evt, ref, displayScaleFactor) => {
+    let rect = ref.current.getBoundingClientRect();
+    return (
+        {
+            x: (evt.clientX - rect.left) / displayScaleFactor,
+            y: (evt.clientY - rect.top) / displayScaleFactor
+        }
     )
 }

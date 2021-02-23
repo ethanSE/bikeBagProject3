@@ -16,6 +16,7 @@
 
 .scaleInput {
     composes: customInputDiv from 'util.css';
+    text-align: center;
 }
 
 .scaleInput h3 {
@@ -43,3 +44,4 @@
 .minimized:hover {
     cursor: pointer;
 }
+

@@ -43,5 +43,6 @@
 
 .minimized:hover {
     cursor: pointer;
+    background-color: #146ba2;
 }
 

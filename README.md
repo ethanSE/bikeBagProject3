@@ -1,6 +1,5 @@
 
 # _Bike Bag Project_
-## Hosted At: http://cube-egg.com 
 #### By _**Ethan Samuels-Ellingson**_
 
 ## Description
@@ -24,7 +23,7 @@ Goals for this project include:
   - build out better display of user's saved designs
   - refactor with typescript
   - rebuild HTML5 canvas interaction for a better UX 
-    - users should be able to drag points
+    - users should be able to drag points (done)
     - real-time feedback about validity (shape must be closed, not self-intersecting)
   - incorporate seam allowance calculations in output displayed to user for demonstration purposes
   - allow user to download SVG file

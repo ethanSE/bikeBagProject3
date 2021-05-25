@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/bikeBagProject3/static/css/main.1acf2de9.chunk.css",
+    "main.js": "/bikeBagProject3/static/js/main.0f440e10.chunk.js",
+    "main.js.map": "/bikeBagProject3/static/js/main.0f440e10.chunk.js.map",
+    "runtime-main.js": "/bikeBagProject3/static/js/runtime-main.6f3604b5.js",
+    "runtime-main.js.map": "/bikeBagProject3/static/js/runtime-main.6f3604b5.js.map",
+    "static/js/2.36c2c086.chunk.js": "/bikeBagProject3/static/js/2.36c2c086.chunk.js",
+    "static/js/2.36c2c086.chunk.js.map": "/bikeBagProject3/static/js/2.36c2c086.chunk.js.map",
+    "static/js/3.7f9fbf62.chunk.js": "/bikeBagProject3/static/js/3.7f9fbf62.chunk.js",
+    "static/js/3.7f9fbf62.chunk.js.map": "/bikeBagProject3/static/js/3.7f9fbf62.chunk.js.map",
+    "index.html": "/bikeBagProject3/index.html",
+    "static/css/main.1acf2de9.chunk.css.map": "/bikeBagProject3/static/css/main.1acf2de9.chunk.css.map",
+    "static/js/2.36c2c086.chunk.js.LICENSE.txt": "/bikeBagProject3/static/js/2.36c2c086.chunk.js.LICENSE.txt",
+    "static/media/Header.module.css": "/bikeBagProject3/static/media/IMG_7651.dcca90a3.JPG",
+    "static/media/final.9eef2061.JPEG": "/bikeBagProject3/static/media/final.9eef2061.JPEG",
+    "static/media/firstAttatchmentMethod.c2371175.jpeg": "/bikeBagProject3/static/media/firstAttatchmentMethod.c2371175.jpeg",
+    "static/media/frameShape.06605e76.jpeg": "/bikeBagProject3/static/media/frameShape.06605e76.jpeg",
+    "static/media/greenBottleSide.2a1f1106.jpeg": "/bikeBagProject3/static/media/greenBottleSide.2a1f1106.jpeg",
+    "static/media/greenZipperSide.6912fd35.jpeg": "/bikeBagProject3/static/media/greenZipperSide.6912fd35.jpeg",
+    "static/media/newZipSide.43b4a0a2.jpeg": "/bikeBagProject3/static/media/newZipSide.43b4a0a2.jpeg",
+    "static/media/newZipTop.bc3f1325.jpeg": "/bikeBagProject3/static/media/newZipTop.bc3f1325.jpeg",
+    "static/media/preppedMaterialsBagOne.9fe3b413.jpeg": "/bikeBagProject3/static/media/preppedMaterialsBagOne.9fe3b413.jpeg",
+    "static/media/sandyRiverDelta.d67e6520.jpeg": "/bikeBagProject3/static/media/sandyRiverDelta.d67e6520.jpeg",
+    "static/media/tracedShape.e693b6f3.jpeg": "/bikeBagProject3/static/media/tracedShape.e693b6f3.jpeg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6f3604b5.js",
+    "static/js/2.36c2c086.chunk.js",
+    "static/css/main.1acf2de9.chunk.css",
+    "static/js/main.0f440e10.chunk.js"
+  ]
+}
